@@ -9,12 +9,11 @@ namespace LandScape
 {
     public partial class Form1 : Form
     {
+        Notification Ntf = new Notification();
+        Engine en = new Engine(16, 12, 40);
         /// <summary>
         /// Массив, в котором хранятся пути к изображениям необходимым для отрисовки карты
         /// </summary>
-        
-        Notification Ntf = new Notification();
-        Engine en = new Engine(16, 12, 40);
         Image[] LoI = new Image[Enum.GetValues(typeof(Engine.TypeOfImg)).Length]; 
         /// <summary>
         /// Двумерный массив, по которому строится карта
@@ -53,7 +52,6 @@ namespace LandScape
             else
             {
                 MapLsc = en.FillMap(Environment.CurrentDirectory + @"\maps\map1.txt", MapLsc);
-                en.FillMapObj(MapLsc);
                 Used = true;
             }
                 this.Refresh();
@@ -76,7 +74,6 @@ namespace LandScape
             else
             {
                 MapLsc = en.FillMap(Environment.CurrentDirectory + @"\maps\map2.txt", MapLsc);
-                en.FillMapObj(MapLsc);
                 Used = true;
             }
             this.Refresh();
@@ -100,19 +97,16 @@ namespace LandScape
             else
             {
                 MapLsc = en.FillMap(Environment.CurrentDirectory + @"\maps\map3.txt", MapLsc);
-                en.FillMapObj(MapLsc);
                 Used = true;
             }
             this.Refresh();
         }
         private void Form1_Load_1(object sender, EventArgs e)
         {
-            
             try 
             {
                 foreach(object i in Enum.GetValues(typeof(Engine.TypeOfImg)))
                     LoI[(int)i] = Image.FromFile(Environment.CurrentDirectory + @"\img\" + Enum.GetName(typeof(Engine.TypeOfImg), i) + ".png");
-                
             }
             catch (FileNotFoundException)
             {

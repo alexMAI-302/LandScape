@@ -12,7 +12,7 @@ namespace LandScape
         /// </summary>
         public int x, y;
         /// <summary>
-        /// Код изображения, соответствующий конкретному объекту
+        /// Изображение, соответствующее конкретному объекту
         /// </summary>
         public Engine.TypeOfImg ImgType; 
         /// <summary>
@@ -22,9 +22,9 @@ namespace LandScape
         /// <summary>
         /// Природные объекты
         /// </summary>
-        /// <param name="w">Координата по горизонтали</param>
-        /// <param name="z">Координата по вертикали</param>
-        /// <param name="Img">Код изображения</param>
+        /// <param name="x">Координата по горизонтали</param>
+        /// <param name="y">Координата по вертикали</param>
+        /// <param name="Img">Изображение</param>
         /// <param name="flag">Флаг проходимости</param>
         public LandScapeObject(int x, int y, Engine.TypeOfImg Img, bool IsPas)
         {
@@ -42,9 +42,9 @@ namespace LandScape
         /// <summary>
         /// Порталы
         /// </summary>
-        /// <param name="w">Координата по горизонтали</param>
-        /// <param name="z">Координата по вертикали</param>
-        /// <param name="Img">Код изображения</param>
+        /// <param name="x">Координата по горизонтали</param>
+        /// <param name="y">Координата по вертикали</param>
+        /// <param name="Img">Изображение</param>
         /// <param name="flag">Флаг проходимости</param>
         public Gates(int x, int y, Engine.TypeOfImg Img, bool IsPas)
             : base(y, y, Img, IsPas)
@@ -62,9 +62,9 @@ namespace LandScape
         /// <summary>
         /// Логово зверя
         /// </summary>
-        /// <param name="w">Координата по горизонтали</param>
-        /// <param name="z">Координата по вертикали</param>
-        /// <param name="Img">Код изображения</param>
+        /// <param name="x">Координата по горизонтали</param>
+        /// <param name="y">Координата по вертикали</param>
+        /// <param name="Img">Изображение</param>
         /// <param name="flag">Флаг проходимости</param>
         public Lair(int x, int y, Engine.TypeOfImg Img, bool flag)
             : base(x, y, Img, flag)
@@ -89,9 +89,9 @@ namespace LandScape
         /// <summary>
         /// Артефакт
         /// </summary>
-        /// <param name="w">Координата по горизонтали</param>
-        /// <param name="z">Координата по вертикали</param>
-        /// <param name="Img">Код изображения</param>
+        /// <param name="x">Координата по горизонтали</param>
+        /// <param name="y">Координата по вертикали</param>
+        /// <param name="Img">Изображение</param>
         /// <param name="flag">Флаг проходимости</param>
         public Artefact(int x, int y, Engine.TypeOfImg Img, bool flag)
             : base(x, y, Img, flag)
