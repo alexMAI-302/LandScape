@@ -62,7 +62,11 @@ namespace LandScape
                     {
                         int a = rnd.Next(0, FLine.Length);
                         int b = rnd.Next(0, FLine[0].Length);
-                        if ((Mtx[a][b] != 4) && (Mtx[a][b] != 3) && (Mtx[a][b] != 1) && (Mtx[a][b] != 6) && (Mtx[a][b] != 8))
+                        if ((Mtx[a][b] != (int)ListOfImg.Land) && 
+                            (Mtx[a][b] != (int)ListOfImg.Water) && 
+                            (Mtx[a][b] != (int)ListOfImg.Rock) && 
+                            (Mtx[a][b] != (int)ListOfImg.Gates) && 
+                            (Mtx[a][b] != (int)ListOfImg.Lair))
                         {
                             Mtx[a][b] = (int)ListOfImg.Tree;
                             Rcnt++;
@@ -70,7 +74,11 @@ namespace LandScape
                         }
                         a = rnd.Next(0, FLine.Length);
                         b = rnd.Next(0, FLine[0].Length);
-                        if ((Mtx[a][b] != 4) && (Mtx[a][b] != 3) && (Mtx[a][b] != 5) && (Mtx[a][b] != 8) && (Mtx[a][b] != 6))
+                        if ((Mtx[a][b] != (int)ListOfImg.Land) &&
+                            (Mtx[a][b] != (int)ListOfImg.Water) && 
+                            (Mtx[a][b] != (int)ListOfImg.Tree) &&
+                            (Mtx[a][b] != (int)ListOfImg.Lair) &&
+                            (Mtx[a][b] != (int)ListOfImg.Gates))
                         {
                             Mtx[a][b] = (int)ListOfImg.Rock; //"код" камня
                             Rcnt++;
@@ -96,60 +104,64 @@ namespace LandScape
         {
             Rock = 1, Grass = 2, Water = 3, Land = 4, Tree = 5, Gates = 6, Artefact = 7, Lair = 8
         }
+        private enum ListOfParams 
+        {
+            Height = 12, Length = 16, Size = 40
+        }
         /// <summary>
         /// Заполнение карты элементами ландшафта
         /// </summary>
         /// <param name="Matrix">Матрица карты</param>
         public void FillMapObj(int[][] Matrix)
         {
-            int w = 0;
-            int z = 0;
+            int x = 0;
+            int y = 0;
             for (int i = 0; i < FLine.Length; i++)
             {
-                w = 0;
+                x = 0;
                 for (int j = 0; j < FLine[0].Length; j++)
                 {
                     switch (Matrix[i][j])
                     {
                        case (int)ListOfImg.Grass:
-                            LandScape.Add(new LandScapeObject(w, z, (int)ListOfImg.Grass, true));
+                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Grass, true));
                             break;
                         case (int)ListOfImg.Water:
-                            LandScape.Add(new LandScapeObject(w, z, (int)ListOfImg.Water, false));
+                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Water, false));
                             break;
                         case (int)ListOfImg.Land:
-                            LandScape.Add(new LandScapeObject(w, z, (int)ListOfImg.Land, true));
+                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Land, true));
                             break;
                         case (int)ListOfImg.Rock:
-                            LandScape.Add(new LandScapeObject(w, z, (int)ListOfImg.Rock, false));
+                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Rock, false));
                             break;
                         case (int)ListOfImg.Tree:
-                            LandScape.Add(new LandScapeObject(w, z, (int)ListOfImg.Tree, false));
+                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Tree, false));
                             break;
                         case (int)ListOfImg.Gates:
-                            LandScape.Add(new LandScapeObject(w, z, (int)ListOfImg.Land, true));
-                            LandScape.Add(new LandScapeObject(w, z, (int)ListOfImg.Gates, true));
+                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Land, true));
+                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Gates, true));
                             break;
                         case (int)ListOfImg.Artefact:
-                            LandScape.Add(new LandScapeObject(w, z, (int)ListOfImg.Grass, true));
-                            LandScape.Add(new LandScapeObject(w, z, (int)ListOfImg.Artefact, true));
+                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Grass, true));
+                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Artefact, true));
                             break;
                         case (int)ListOfImg.Lair:
-                            LandScape.Add(new LandScapeObject(w, z, (int)ListOfImg.Grass, true));
-                            LandScape.Add(new LandScapeObject(w, z, (int)ListOfImg.Lair, false));
+                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Grass, true));
+                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Lair, false));
                             break;
                     }
-                    w += Size;
+                    x += Size;
                 }
-                if (w == Length*Size)
-                    z += Size;
+                if (x == Length*Size)
+                    y += Size;
             }
         }
         public Engine()
         {
-            this.Length = 16;
-            this.Height = 12;
-            this.Size = 40;
+            this.Length = (int)ListOfParams.Length;
+            this.Height = (int)ListOfParams.Height;
+            this.Size = (int)ListOfParams.Size;
         }
     }
 }
