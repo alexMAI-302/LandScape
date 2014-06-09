@@ -124,31 +124,31 @@ namespace LandScape
                     switch ((TypeOfImg)Enum.ToObject(typeof(TypeOfImg), Matrix[i][j])) 
                     {
                        case TypeOfImg.Grass:
-                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Grass, true)); 
+                            LandScape.Add(new LandScapeObject(x, y, TypeOfImg.Grass, true)); 
                             break;
                         case TypeOfImg.Water:
-                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Water, false));
+                            LandScape.Add(new LandScapeObject(x, y, TypeOfImg.Water, false));
                             break;
                         case TypeOfImg.Land:
-                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Land, true));
+                            LandScape.Add(new LandScapeObject(x, y, TypeOfImg.Land, true));
                             break;
                         case (int)TypeOfImg.Rock:
-                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Rock, false));
+                            LandScape.Add(new LandScapeObject(x, y, TypeOfImg.Rock, false));
                             break;
                         case TypeOfImg.Tree:
-                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Tree, false));
+                            LandScape.Add(new LandScapeObject(x, y, TypeOfImg.Tree, false));
                             break;
                         case TypeOfImg.Gates:
-                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Land, true));
-                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Gates, true));
+                            LandScape.Add(new LandScapeObject(x, y, TypeOfImg.Land, true));
+                            LandScape.Add(new LandScapeObject(x, y, TypeOfImg.Gates, true));
                             break;
                         case TypeOfImg.Artefact:
-                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Grass, true));
-                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Artefact, true));
+                            LandScape.Add(new LandScapeObject(x, y, TypeOfImg.Grass, true));
+                            LandScape.Add(new LandScapeObject(x, y, TypeOfImg.Artefact, true));
                             break;
                         case TypeOfImg.Lair:
-                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Grass, true));
-                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Lair, false));
+                            LandScape.Add(new LandScapeObject(x, y, TypeOfImg.Grass, true));
+                            LandScape.Add(new LandScapeObject(x, y, TypeOfImg.Lair, false));
                             break;
                     }
                     x += Size;
@@ -157,11 +157,11 @@ namespace LandScape
                     y += Size;
             }
         }
-        public Engine()
+        public Engine(int Length, int Height, int Size)
         {
-            this.Length = (int)ListOfParams.Length;
-            this.Height = (int)ListOfParams.Height;
-            this.Size = (int)ListOfParams.Size;
+            this.Length = Length;
+            this.Height = Height;
+            this.Size = Size;
         }
     }
 }

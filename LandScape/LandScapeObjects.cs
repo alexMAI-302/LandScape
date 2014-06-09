@@ -14,7 +14,7 @@ namespace LandScape
         /// <summary>
         /// Код изображения, соответствующий конкретному объекту
         /// </summary>
-        public int ImgType; //ImgTypes ImgType
+        public Engine.TypeOfImg ImgType; 
         /// <summary>
         /// Флаг, отвечающий за проходимость объекта
         /// </summary>
@@ -26,12 +26,12 @@ namespace LandScape
         /// <param name="z">Координата по вертикали</param>
         /// <param name="Img">Код изображения</param>
         /// <param name="flag">Флаг проходимости</param>
-        public LandScapeObject(int w, int z, int Img, bool flag)
+        public LandScapeObject(int x, int y, Engine.TypeOfImg Img, bool IsPas)
         {
-            x = w;
-            y = z;
+            this.x = x;
+            this.y = y;
             ImgType = Img;
-            IsPas = flag;
+            this.IsPas = IsPas;
         }
     }
     /// <summary>
@@ -46,8 +46,8 @@ namespace LandScape
         /// <param name="z">Координата по вертикали</param>
         /// <param name="Img">Код изображения</param>
         /// <param name="flag">Флаг проходимости</param>
-        public Gates(int w, int z, int Img, bool flag)
-            : base(w, z, Img, flag)
+        public Gates(int x, int y, Engine.TypeOfImg Img, bool IsPas)
+            : base(y, y, Img, IsPas)
         { }
     }
     /// <summary>
@@ -56,9 +56,9 @@ namespace LandScape
     class Lair : LandScapeObject
     {
         /// <summary>
-        /// Вид зверя
+        /// Сила зверя
         /// </summary>
-        int Beast;
+        int BeastPower;
         /// <summary>
         /// Логово зверя
         /// </summary>
@@ -66,11 +66,11 @@ namespace LandScape
         /// <param name="z">Координата по вертикали</param>
         /// <param name="Img">Код изображения</param>
         /// <param name="flag">Флаг проходимости</param>
-        public Lair(int w, int z, int Img, bool flag)
-            : base(w, z, Img, flag)
+        public Lair(int x, int y, Engine.TypeOfImg Img, bool flag)
+            : base(x, y, Img, flag)
         {
             Random rnd = new Random();
-            Beast = rnd.Next(0, 5); 
+            BeastPower = rnd.Next(0, 5); 
         }
     }
     /// <summary>
@@ -93,8 +93,8 @@ namespace LandScape
         /// <param name="z">Координата по вертикали</param>
         /// <param name="Img">Код изображения</param>
         /// <param name="flag">Флаг проходимости</param>
-        public Artefact(int w, int z, int Img, bool flag)
-            : base(w, z, Img, flag)
+        public Artefact(int x, int y, Engine.TypeOfImg Img, bool flag)
+            : base(x, y, Img, flag)
         {
             Random rnd = new Random();
             Power = rnd.Next(1, 10);

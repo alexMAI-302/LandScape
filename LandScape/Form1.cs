@@ -14,7 +14,7 @@ namespace LandScape
         /// </summary>
         
         Notification Ntf = new Notification();
-        Engine en = new Engine();
+        Engine en = new Engine(16, 12, 40);
         Image[] LoI = new Image[Enum.GetValues(typeof(Engine.TypeOfImg)).Length]; 
         /// <summary>
         /// Двумерный массив, по которому строится карта
@@ -110,14 +110,9 @@ namespace LandScape
             
             try 
             {
-                LoI[(int)Engine.TypeOfImg.Rock] = Image.FromFile(Environment.CurrentDirectory + @"\img\Rock.bmp"); 
-                LoI[(int)Engine.TypeOfImg.Grass] = Image.FromFile(Environment.CurrentDirectory + @"\img\Grass.bmp");
-                LoI[(int)Engine.TypeOfImg.Water] = Image.FromFile(Environment.CurrentDirectory + @"\img\Water.bmp");
-                LoI[(int)Engine.TypeOfImg.Land] = Image.FromFile(Environment.CurrentDirectory + @"\img\Land.bmp");
-                LoI[(int)Engine.TypeOfImg.Tree] = Image.FromFile(Environment.CurrentDirectory + @"\img\Tree.bmp");
-                LoI[(int)Engine.TypeOfImg.Gates] = Image.FromFile(Environment.CurrentDirectory + @"\img\Gates.png");
-                LoI[(int)Engine.TypeOfImg.Artefact] = Image.FromFile(Environment.CurrentDirectory + @"\img\Artefact.png");
-                LoI[(int)Engine.TypeOfImg.Lair] = Image.FromFile(Environment.CurrentDirectory + @"\img\Lair.png");
+                foreach(object i in Enum.GetValues(typeof(Engine.TypeOfImg)))
+                    LoI[(int)i] = Image.FromFile(Environment.CurrentDirectory + @"\img\" + Enum.GetName(typeof(Engine.TypeOfImg), i) + ".png");
+                
             }
             catch (FileNotFoundException)
             {
@@ -130,7 +125,7 @@ namespace LandScape
         {
             for (int i = 0; i < en.LandScape.Count; i++)
             {
-                e.Graphics.DrawImage(LoI[en.LandScape[i].ImgType], en.LandScape[i].x, en.LandScape[i].y);
+                e.Graphics.DrawImage(LoI[(int)en.LandScape[i].ImgType], en.LandScape[i].x, en.LandScape[i].y);
             } 
         }
     }
