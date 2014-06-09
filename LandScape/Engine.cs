@@ -62,25 +62,25 @@ namespace LandScape
                     {
                         int a = rnd.Next(0, FLine.Length);
                         int b = rnd.Next(0, FLine[0].Length);
-                        if ((Mtx[a][b] != (int)ListOfImg.Land) && 
-                            (Mtx[a][b] != (int)ListOfImg.Water) && 
-                            (Mtx[a][b] != (int)ListOfImg.Rock) && 
-                            (Mtx[a][b] != (int)ListOfImg.Gates) && 
-                            (Mtx[a][b] != (int)ListOfImg.Lair))
+                        if ((Mtx[a][b] != (int)TypeOfImg.Land) && 
+                            (Mtx[a][b] != (int)TypeOfImg.Water) && 
+                            (Mtx[a][b] != (int)TypeOfImg.Rock) && 
+                            (Mtx[a][b] != (int)TypeOfImg.Gates) && 
+                            (Mtx[a][b] != (int)TypeOfImg.Lair))
                         {
-                            Mtx[a][b] = (int)ListOfImg.Tree;
+                            Mtx[a][b] = (int)TypeOfImg.Tree;
                             Rcnt++;
                             break;
                         }
                         a = rnd.Next(0, FLine.Length);
                         b = rnd.Next(0, FLine[0].Length);
-                        if ((Mtx[a][b] != (int)ListOfImg.Land) &&
-                            (Mtx[a][b] != (int)ListOfImg.Water) && 
-                            (Mtx[a][b] != (int)ListOfImg.Tree) &&
-                            (Mtx[a][b] != (int)ListOfImg.Lair) &&
-                            (Mtx[a][b] != (int)ListOfImg.Gates))
+                        if ((Mtx[a][b] != (int)TypeOfImg.Land) &&
+                            (Mtx[a][b] != (int)TypeOfImg.Water) && 
+                            (Mtx[a][b] != (int)TypeOfImg.Tree) &&
+                            (Mtx[a][b] != (int)TypeOfImg.Lair) &&
+                            (Mtx[a][b] != (int)TypeOfImg.Gates))
                         {
-                            Mtx[a][b] = (int)ListOfImg.Rock; //"код" камня
+                            Mtx[a][b] = (int)TypeOfImg.Rock; //"код" камня
                             Rcnt++;
                             break;
                         }
@@ -88,7 +88,7 @@ namespace LandScape
                         b = rnd.Next(1, FLine[0].Length - 1);
                         if ((ArtCnt < Math.Truncate(Math.Sqrt(Length))) && (Mtx[a][b] != 4) && (Mtx[a][b] != 3) && (Mtx[a][b] != 8) && (Mtx[a][b] != 6))
                         {
-                            Mtx[a][b] = (int)ListOfImg.Artefact; // код артефакта
+                            Mtx[a][b] = (int)TypeOfImg.Artefact; // код артефакта
                             ArtCnt++;
                             break;
                         }
@@ -100,9 +100,9 @@ namespace LandScape
         /// <summary>
         /// Перечисление элементов ландшафта 
         /// </summary>
-        public enum ListOfImg : int
+        public enum TypeOfImg : int //ImgTypes
         {
-            Rock = 1, Grass = 2, Water = 3, Land = 4, Tree = 5, Gates = 6, Artefact = 7, Lair = 8
+            Rock = 0, Grass = 1, Water = 2, Land = 3, Tree = 4, Gates = 5, Artefact = 6, Lair = 7
         }
         private enum ListOfParams 
         {
@@ -121,34 +121,34 @@ namespace LandScape
                 x = 0;
                 for (int j = 0; j < FLine[0].Length; j++)
                 {
-                    switch (Matrix[i][j])
+                    switch ((TypeOfImg)Enum.ToObject(typeof(TypeOfImg), Matrix[i][j])) 
                     {
-                       case (int)ListOfImg.Grass:
-                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Grass, true));
+                       case TypeOfImg.Grass:
+                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Grass, true)); 
                             break;
-                        case (int)ListOfImg.Water:
-                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Water, false));
+                        case TypeOfImg.Water:
+                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Water, false));
                             break;
-                        case (int)ListOfImg.Land:
-                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Land, true));
+                        case TypeOfImg.Land:
+                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Land, true));
                             break;
-                        case (int)ListOfImg.Rock:
-                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Rock, false));
+                        case (int)TypeOfImg.Rock:
+                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Rock, false));
                             break;
-                        case (int)ListOfImg.Tree:
-                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Tree, false));
+                        case TypeOfImg.Tree:
+                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Tree, false));
                             break;
-                        case (int)ListOfImg.Gates:
-                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Land, true));
-                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Gates, true));
+                        case TypeOfImg.Gates:
+                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Land, true));
+                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Gates, true));
                             break;
-                        case (int)ListOfImg.Artefact:
-                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Grass, true));
-                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Artefact, true));
+                        case TypeOfImg.Artefact:
+                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Grass, true));
+                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Artefact, true));
                             break;
-                        case (int)ListOfImg.Lair:
-                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Grass, true));
-                            LandScape.Add(new LandScapeObject(x, y, (int)ListOfImg.Lair, false));
+                        case TypeOfImg.Lair:
+                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Grass, true));
+                            LandScape.Add(new LandScapeObject(x, y, (int)TypeOfImg.Lair, false));
                             break;
                     }
                     x += Size;

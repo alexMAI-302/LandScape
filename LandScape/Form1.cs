@@ -12,9 +12,10 @@ namespace LandScape
         /// <summary>
         /// Массив, в котором хранятся пути к изображениям необходимым для отрисовки карты
         /// </summary>
-        Image[] LoI = new Image[8];
+        
         Notification Ntf = new Notification();
         Engine en = new Engine();
+        Image[] LoI = new Image[Enum.GetValues(typeof(Engine.TypeOfImg)).Length]; 
         /// <summary>
         /// Двумерный массив, по которому строится карта
         /// </summary>
@@ -106,16 +107,17 @@ namespace LandScape
         }
         private void Form1_Load_1(object sender, EventArgs e)
         {
-            try
+            
+            try 
             {
-                LoI[0] = Image.FromFile(Environment.CurrentDirectory + @"\img\Rock.bmp");
-                LoI[1] = Image.FromFile(Environment.CurrentDirectory + @"\img\Grass.bmp");
-                LoI[2] = Image.FromFile(Environment.CurrentDirectory + @"\img\Water.bmp");
-                LoI[3] = Image.FromFile(Environment.CurrentDirectory + @"\img\Land.bmp");
-                LoI[4] = Image.FromFile(Environment.CurrentDirectory + @"\img\Tree.bmp");
-                LoI[5] = Image.FromFile(Environment.CurrentDirectory + @"\img\Gates.png");
-                LoI[6] = Image.FromFile(Environment.CurrentDirectory + @"\img\Artefact.png");
-                LoI[7] = Image.FromFile(Environment.CurrentDirectory + @"\img\Lair.png");
+                LoI[(int)Engine.TypeOfImg.Rock] = Image.FromFile(Environment.CurrentDirectory + @"\img\Rock.bmp"); 
+                LoI[(int)Engine.TypeOfImg.Grass] = Image.FromFile(Environment.CurrentDirectory + @"\img\Grass.bmp");
+                LoI[(int)Engine.TypeOfImg.Water] = Image.FromFile(Environment.CurrentDirectory + @"\img\Water.bmp");
+                LoI[(int)Engine.TypeOfImg.Land] = Image.FromFile(Environment.CurrentDirectory + @"\img\Land.bmp");
+                LoI[(int)Engine.TypeOfImg.Tree] = Image.FromFile(Environment.CurrentDirectory + @"\img\Tree.bmp");
+                LoI[(int)Engine.TypeOfImg.Gates] = Image.FromFile(Environment.CurrentDirectory + @"\img\Gates.png");
+                LoI[(int)Engine.TypeOfImg.Artefact] = Image.FromFile(Environment.CurrentDirectory + @"\img\Artefact.png");
+                LoI[(int)Engine.TypeOfImg.Lair] = Image.FromFile(Environment.CurrentDirectory + @"\img\Lair.png");
             }
             catch (FileNotFoundException)
             {
@@ -128,8 +130,8 @@ namespace LandScape
         {
             for (int i = 0; i < en.LandScape.Count; i++)
             {
-                e.Graphics.DrawImage(LoI[en.LandScape[i].ImgNum - 1], en.LandScape[i].x, en.LandScape[i].y);
-            }
+                e.Graphics.DrawImage(LoI[en.LandScape[i].ImgType], en.LandScape[i].x, en.LandScape[i].y);
+            } 
         }
     }
 }

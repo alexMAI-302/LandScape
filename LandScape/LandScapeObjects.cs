@@ -14,7 +14,7 @@ namespace LandScape
         /// <summary>
         /// Код изображения, соответствующий конкретному объекту
         /// </summary>
-        public int ImgNum;
+        public int ImgType; //ImgTypes ImgType
         /// <summary>
         /// Флаг, отвечающий за проходимость объекта
         /// </summary>
@@ -30,7 +30,7 @@ namespace LandScape
         {
             x = w;
             y = z;
-            ImgNum = Img;
+            ImgType = Img;
             IsPas = flag;
         }
     }
