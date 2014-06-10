@@ -36,14 +36,14 @@ namespace LandScape
         /// </summary>
         /// <param name="Matrix">Матрица карты</param>
         /// <param name="FLine">Массив строк</param>
-        public void FillMapObj(int[][] Matrix, string[] FLine)
+        public void FillMapObj(int[][] Matrix)
         {
             int x = 0;
             int y = 0;
-            for (int i = 0; i < FLine.Length; i++)
+            for (int i = 0; i < Matrix.Length; i++)
             {
                 x = 0;
-                for (int j = 0; j < FLine[0].Length; j++)
+                for (int j = 0; j < Matrix[0].Length; j++)
                 {
                     switch ((TypeOfImg)Enum.ToObject(typeof(TypeOfImg), Matrix[i][j]))
                     {
@@ -102,12 +102,12 @@ namespace LandScape
             Random rnd = new Random();
             while (Rcnt < Math.Truncate(Math.Sqrt(Length*Height)))
             {
-                for (int i = 0; i < FLine.Length; i++)
+                for (int i = 0; i < Mtx.Length; i++) 
                 {
-                    for (int j = 0; j < FLine[0].Length; j++)
+                    for (int j = 0; j < Mtx[0].Length; j++) 
                     {
-                        int a = rnd.Next(0, FLine.Length);
-                        int b = rnd.Next(0, FLine[0].Length);
+                        int a = rnd.Next(0, Mtx.Length); 
+                        int b = rnd.Next(0, Mtx[0].Length); 
                         TypeOfImg R = (TypeOfImg)Enum.ToObject(typeof(TypeOfImg), Mtx[a][b]);
                         if ((R != TypeOfImg.Land) && 
                             (R != TypeOfImg.Water) &&
@@ -119,8 +119,8 @@ namespace LandScape
                             Rcnt++;
                             break;
                         }
-                        a = rnd.Next(0, FLine.Length);
-                        b = rnd.Next(0, FLine[0].Length);
+                        a = rnd.Next(0, Mtx.Length); 
+                        b = rnd.Next(0, Mtx[0].Length); 
                         R = (TypeOfImg)Enum.ToObject(typeof(TypeOfImg), Mtx[a][b]);
                         if ((R != TypeOfImg.Land) &&
                             (R != TypeOfImg.Water) &&
@@ -132,8 +132,8 @@ namespace LandScape
                             Rcnt++;
                             break;
                         }
-                        a = rnd.Next(1, FLine.Length - 1);
-                        b = rnd.Next(1, FLine[0].Length - 1);
+                        a = rnd.Next(1, Mtx.Length - 1); 
+                        b = rnd.Next(1, Mtx[0].Length - 1); 
                         R = (TypeOfImg)Enum.ToObject(typeof(TypeOfImg), Mtx[a][b]);
                         if ((ArtCnt < Math.Truncate(Math.Sqrt(Length))) && (R != TypeOfImg.Tree) &&
                             (R != TypeOfImg.Land) && (R != TypeOfImg.Lair) && (R != TypeOfImg.Gates))
@@ -145,7 +145,7 @@ namespace LandScape
                     }
                 }
             }
-            FillMapObj(Mtx, FLine);
+            FillMapObj(Mtx);
             return Mtx;
         }
         /// <summary>
